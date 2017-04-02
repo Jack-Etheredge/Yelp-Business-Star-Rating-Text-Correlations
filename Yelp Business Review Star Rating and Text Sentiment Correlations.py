@@ -12,7 +12,6 @@ for d in reviewData[0:20]:
   text = parsed["text"]
   tb = TextBlob(text)
   polarity = tb.sentiment.polarity
-  correlation = pearsonr()
   businessData = businessInfo.get(business, [])  # Get the list of scores and polarities out of businessInfo. If there's no entry for that business yet, get an empty list.
   businessData.append((score, polarity,))         # Append a tuple to businessData. businessData is always a list of tuples where the first value is the score and the second value is the polarity.
   businessInfo[business] = businessData
@@ -28,7 +27,6 @@ for business, scoreAndPolarity in businessInfo.iteritems():      # Iterates over
   	scores.append((scoreAndPolarity[x])[0])
   	polarities.append((scoreAndPolarity[x])[1])
   correlation = pearsonr(scores, polarities)
-#  businessCorrelations.append((business, correlation,)) # If we had made businessCorrelations a list instead, this would have made tuples of business and correlations
   businessCorrelations[business] = correlation
 
 # show business with associated correlation
